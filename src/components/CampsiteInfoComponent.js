@@ -4,13 +4,14 @@ import { Card, CardImg, CardText, CardBody, CardTitle } from 'reactstrap';
 class CampsiteInfo extends Component {
 
     renderCampsite(campsite) {
+        const {image, name, description} = campsite;
         return(
             <div className='col-md-5 m-1'>
                 <Card>
-                    <CardImg top src={campsite.image} alt={campsite.name} />
+                    <CardImg top src={image} alt={name} />
                     <CardBody>
-                        <CardTitle>{campsite.name}</CardTitle>
-                        <CardText>{campsite.description}</CardText>
+                        <CardTitle>{name}</CardTitle>
+                        <CardText>{description}</CardText>
                     </CardBody>
                 </Card>
             </div>
@@ -22,8 +23,15 @@ class CampsiteInfo extends Component {
             return(
                 <div className='col-md-5 m-1'>
                     <h4>Comments</h4>
-                    {comments.map(c => <span key={c.id}>{c.text}<br/>
-                        --{c.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(c.date)))}<br/><br/></span>)}
+                    {comments.map(c => {
+                        const {id, text, author, date} = c;
+                        return (
+                            <span key={id}>{text}<br/>
+                                --{author}, 
+                                {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(date)))}<br/><br/>
+                            </span>
+                        );
+                    })}     
                 </div>
             );
         }
@@ -31,11 +39,14 @@ class CampsiteInfo extends Component {
     }
 
     render() {
-        if(this.props.campsite) {
+        const {campsite} = this.props;
+        if(campsite) {
             return (
-                <div className="row">
-                    {this.renderCampsite(this.props.campsite)}
-                    {this.renderComments(this.props.campsite.comments)}
+                <div className='container'>
+                    <div className="row">
+                        {this.renderCampsite(campsite)}
+                        {this.renderComments(campsite.comments)}
+                    </div>
                 </div>
             );
         }
