@@ -11,27 +11,25 @@ const validEmail = val => /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(val);
 
 class Contact extends Component {
 
-    constructor(props) {
-        super(props);
+    //constructor(props) {
+        //super(props);
 
-        this.state = {
-            firstName: '',
-            lastName: '',
-            phoneNum: '',
-            email: '',
-            agree: false,
-            contactType: 'By Phone',
-            feedback: '', 
-            touched: {
-                firstName: false,
-                lastName: false,
-                phoneNum: false,
-                email: false
-            }
-        };
-
-        this.handleSubmit = this.handleSubmit.bind(this);
-    }
+        // this.state = {
+        //     firstName: '',
+        //     lastName: '',
+        //     phoneNum: '',
+        //     email: '',
+        //     agree: false,
+        //     contactType: 'By Phone',
+        //     feedback: '', 
+        //     touched: {
+        //         firstName: false,
+        //         lastName: false,
+        //         phoneNum: false,
+        //         email: false
+        //     }
+        // };
+    //}
     
     handleSubmit(values) {
         console.log("Current state is: " + JSON.stringify(values));
@@ -183,6 +181,7 @@ class Contact extends Component {
                                                 model=".agree"
                                                 name="agree"
                                                 className='form-check-input'
+                                                defaultValue={false}
                                             /> {' '}
                                             <strong>May we contact you?</strong>
                                         </Label>
@@ -190,7 +189,7 @@ class Contact extends Component {
                                 </Col>
                                 <Col md={4}>
                                     <Control.select model=".contactType" name="contactType"
-                                        className='form-control'>
+                                        className='form-control' defaultValue="By Phone">
                                         <option>By Phone</option>
                                         <option>By Email</option>
                                     </Control.select>
